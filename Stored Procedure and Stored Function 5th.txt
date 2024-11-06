@@ -1,0 +1,68 @@
+***** ASSIGNMENT NAME:
+      Named PL/SQL Block: PL/SQL Stored Procedure and Stored Function. Write a Stored Procedure namely proc_Grade for the categorization of student. If marks scoredby students in examination is <=1500 and marks>=990 then student will be placed in distinction category if marks scored are between 989 and 900 category is first class, if marks 899 and 825 category is Higher Second Class. Write a PL/SQL block to use procedure created with above requirement. Stud_Marks(name, total_marks) Result(Roll,Name, Class *****
+
+SET SERVEROUT ON
+SQL> SET VERIFY OFF
+SQL> --CREATE TABLE stud_marks(name VARCHAR2(25),total_marks NUMBER);
+SQL> --CREATE TABLE result(roll_number NUMBER , name VARCHAR2(25), class VARCHAR2(30));
+SQL> -- CREATE TABLE ONLY ONCE
+SQL>
+SQL> CREATE OR REPLACE FUNCTION func_1(r IN NUMBER, n IN VARCHAR2,m IN NUMBER) RETURN VARCHAR2 AS
+  2  BEGIN
+  3  procedure_1(r,n,m);
+  4  return 'SUCCESSFULL';
+  5  END;
+  6  /
+
+Function created.
+
+SQL> CREATE OR REPLACE PROCEDURE procedure_1 ( roll_no IN NUMBER, name IN VARCHAR2 ,marks IN NUMBER) AS
+  2  BEGIN
+  3  IF (marks<=1500 and marks>=990) THEN
+  4  DBMS_OUTPUT.PUT_LINE ('DISTINCTION');
+  5  INSERT INTO result VALUES (roll_no,name,'DISTINCTION');
+  6  ELSIF (marks<=989 and marks>=900) THEN
+  7  DBMS_OUTPUT.PUT_LINE ('FIRST CLASS');
+  8  INSERT INTO result VALUES (roll_no,name,'FIRST CLASS');
+  9  ELSIF (marks<=899 and marKs>825) THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HIGHER SECOND CLASS');
+ 11  INSERT INTO result VALUES (roll_no,name,'HIGHER SECOND CLASS');
+ 12  ELSE
+ 13  DBMS_OUTPUT.PUT_LINE ('FAIL');
+ 14  INSERT INTO result VALUES (roll_no,name,'FAIL');
+ 15
+ 16      END IF;
+ 17      INSERT INTO stud_marks VALUES (name,marks);
+ 18      END procedure_1;
+ 19      /
+
+Procedure created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> DECLARE
+  2  name_1 VARCHAR2(25);
+  3  roll_no_1 NUMBER;
+  4  marks_1 NUMBER;
+  5  class VARCHAR2(25);
+  6
+  7  BEGIN
+  8  roll_no_1:=&roll_no_1;
+  9  name_1:='&name_1';
+ 10  marks_1:=&marks_1;
+ 11  class := func_1(roll_no_1,name_1,marks_1);
+ 12  dbms_output.put_line(class);
+ 13  END;
+ 14  /
+Enter value for roll_no_1: 12
+Enter value for name_1: RAJ
+Enter value for marks_1: 900
+FIRST CLASS
+SUCCESSFULL
+
+PL/SQL procedure successfully completed.
+
+SQ
