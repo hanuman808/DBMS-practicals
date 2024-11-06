@@ -1,0 +1,43 @@
+
+
+
+MongoDB - Aggregation and Indexing: Design and Develop MongoDB Queries using aggregation and indexing with suitable using MongoDB.
+******************************Insert***************************
+
+customer> db.cust_tab.insertMany([{Item_id: 01, Name: "Tanmay", Product: "Red Wine", Amount: 29000}, {Item_id: 02, Name: "Tanmay", Product: "White Wine", Amount: 15000},{Item_id: 03, Name: "Om", Product: "Italian Cuisine", Amount: 5500}, {Item_id: 04, Name: "Om", Product: "Coffee", Amount: 800}, {Item_id: 05, Name: "Jay", Product: "Korean Ramen", Amount: 1800}]);
+
+****************************aggregate************************************
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$sum: "Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$sum: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$avg: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$min: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$max: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$first: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$last: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$push: "$Amount"}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$sum: 1}}});
+
+ db.cust_tab.aggregate({$group: {_id: "$Name", "Total": {$addToSet: "$Amount"}}});
+
+**************************Create**********************
+
+ db.cust_tab.createIndex({'Item_id': 1})
+
+ db.cust_tab.createIndex({'Item_id': 2})
+
+ db.cust_tab.createIndex({'Item_id': 4})
+
+ db.cust_tab.dropIndex({'Item_id': 4})
+
+ db.cust_tab.dropIndex({'Item_id': 1})
+
+ db.cust_tab.getIndexes()
