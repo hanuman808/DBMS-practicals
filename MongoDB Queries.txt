@@ -1,0 +1,28 @@
+MongoDB QUeries:Design and Develop MongoDB Queries using CRUD operations.
+
+
+
+db.stu_details.insertMany([{name: "Tanmay", age: 20, city: "Pune"},{name: "Om", city: "Mumbai"}]);
+
+db.stu_details.find().pretty()
+
+db.stu_details.updateOne({name: "Tanmay"}, {$set: {age: 21}});
+
+db.stu_details.updateMany({city: "Mumbai"}, {$set: {city: "London"}});
+
+db.stu_details.find().pretty()
+
+db.stu_details.deleteOne({name: "Romaan"});
+
+db.stu_details.find().pretty()
+
+db.stu_details.find({$or: [{age: {$lt: 25}}, {city: "Pune"}]});
+
+db.stu_details.find({age: {$not: {$gt: 20}}});
+
+
+db.stu_details.find({$and: [{age: {$gt: 22}}, {city: "Pune"}]});
+
+db.stu_details.find({$and: [{age: {$gt: 20}}, {city: "Pune"}]});
+
+db.stu_details.find({$nor: [{age: {$lt: 25}}, {city: "Mumbai"}]});
