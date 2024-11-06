@@ -4,7 +4,7 @@
 MongoDB - Aggregation and Indexing: Design and Develop MongoDB Queries using aggregation and indexing with suitable using MongoDB.
 ******************************Insert***************************
 
-customer> db.cust_tab.insertMany([{Item_id: 01, Name: "Tanmay", Product: "Red Wine", Amount: 29000}, {Item_id: 02, Name: "Tanmay", Product: "White Wine", Amount: 15000},{Item_id: 03, Name: "Om", Product: "Italian Cuisine", Amount: 5500}, {Item_id: 04, Name: "Om", Product: "Coffee", Amount: 800}, {Item_id: 05, Name: "Jay", Product: "Korean Ramen", Amount: 1800}]);
+customer> db.cust_tab.insertMany([{Item_id: 01, Name: "Hanuman", Product: "Red Wine", Amount: 29000}, {Item_id: 02, Name: "john", Product: "White Wine", Amount: 15000},{Item_id: 03, Name: "Om", Product: "Italian Cuisine", Amount: 5500}, {Item_id: 04, Name: "Om", Product: "Coffee", Amount: 800}, {Item_id: 05, Name: "Jay", Product: "Korean Ramen", Amount: 1800}]);
 
 ****************************aggregate************************************
 
