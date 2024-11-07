@@ -2,11 +2,11 @@ MongoDB QUeries:Design and Develop MongoDB Queries using CRUD operations.
 
 
 
-db.stu_details.insertMany([{name: "Tanmay", age: 20, city: "Pune"},{name: "Om", city: "Mumbai"}]);
+db.stu_details.insertMany([{name: "Hanuman", age: 20, city: "Pune"},{name: "Om", city: "Mumbai"}]);
 
 db.stu_details.find().pretty()
 
-db.stu_details.updateOne({name: "Tanmay"}, {$set: {age: 21}});
+db.stu_details.updateOne({name: "Hanuman"}, {$set: {age: 21}});
 
 db.stu_details.updateMany({city: "Mumbai"}, {$set: {city: "London"}});
 
