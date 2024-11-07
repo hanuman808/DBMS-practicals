@@ -1,0 +1,37 @@
+Program : 
+Write a database trigger on Library table. The System should keep track of the records that are being updated or deleted. The old value of updated or deleted records should be added in Library_Audit table.
+
+SET SERVEROUT ON
+SET VERIFY OFF
+CREATE TABLE Lib_1(book_name VARCHAR2(25),status VARCHAR2(15));
+INSERT INTO Lib_1 VALUES('DARK MATTER','AVAILABLE');
+INSERT INTO Lib_1 VALUES ('SILENT HILL','UNAVAILABLE');
+INSERT INTO Lib_1 VALUES('GOD OF WAR','AVAILABLE');
+INSERT INTO Lib_1 VALUES('BAT-MAN','UNAVAILABLE');
+CREATE TABLE library_ad(date_modified DATE, book_name VARCHAR2(25),old_status VARCHAR(15),new_status VARCHAR2(15),action VARCHAR2(25));
+CREATE OR REPLACE TRIGGER Trig
+    AFTER UPDATE OR DELETE OR INSERT ON Lib_1 FOR EACH ROW
+    ENABLE
+    BEGIN
+    IF UPDATING THEN
+    dbms_output.put_line(:OLD.status);
+    INSERT INTO library_ad VALUES (SYSDATE,:OLD.book_name,:OLD.status,:NEW.status,'UPDATE');
+    ELSIF INSERTING THEN
+    dbms_output.put_line(:NEW.status);
+    INSERT INTO library_ad VALUES (SYSDATE,:NEW.book_name,:OLD.status,:NEW.status,'INSERT');
+   ELSE
+   dbms_output.put_line(:OLD.book_name||'deleting');
+   INSERT INTO library_ad VALUES(SYSDATE,:OLD.book_name,:OLD.status,:NEW.status,'DELETE');
+   END IF;
+   END;
+   /
+
+
+UPDATE Lib_1 SET status = 'PRE-ORDER' WHERE book_name = 'GOD OF WAR';
+INSERT INTO Lib_1 VALUES('SPM','UNAVAILABLE');
+
+UPDATE Lib_1 SET status = 'UNAVAILABLE' WHERE book_name =  'DARK MATTER';
+
+DELETE FROM Lib_1 WHERE book_name = 'SILENT HILL';
+
+
