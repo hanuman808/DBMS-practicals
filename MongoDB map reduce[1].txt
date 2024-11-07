@@ -1,0 +1,19 @@
+
+
+ db.stt.insertMany([{Cust_id: "A", Product: "Dark Chocolate", Amount: 250, Status: "Not Paid"},{Cust_id: "A", Product: "Cadburry", Amount: 200, Status: "Paid"},{Cust_id: "A", Product: "Proteins", Amount: 2500, Status: "Paid"},{Cust_id: "A", Product: "Dark Chocolate", Amount: 250, Status: "Not Paid"},{Cust_id: "A", Product: "Biscuits", Amount: 200, Status: "Not Paid"}]);
+
+ db.stt.find().pretty()
+
+ db.stt.mapReduce(function(){emit(this.Cust_id, this.Amazon)}, function(key,values){return Array.sum(values)}, {query: {"Status": "Not Paid"}, out: "Bill_Amount"})
+
+ var mapfun1=function(){emit(this.Cust_id, this.Amount);};
+
+ var reducefun1=function(keyCust_id, valuePrize){return Array.sum(valuePrize);};
+
+ db.stt.mapReduce(mapfun1, reducefun1, {out: "Map"})
+
+ db.Bill_Amount.find().pretty()
+
+ db.stt.mapReduce(function(){emit(this.C, this.Amazon);}, function(key, values){return Array.sum(values)}, {query: {"Status": "Not Paid"}, out: "Bill_Amount"})
+
+ db.Bill_Amount.find().pretty()
